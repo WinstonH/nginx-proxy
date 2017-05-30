@@ -1,3 +1,7 @@
 #!/bin/sh
-sed -i "s/127.0.0.1/$host/g" /etc/nginx/conf.d/default.conf
-nginx
+echo ":80 {
+ gzip
+ proxy / http://$host
+}" > /usr/local/caddy/Caddyfile
+cd /usr/local/caddy
+./caddy -conf /usr/local/caddy/Caddyfile
