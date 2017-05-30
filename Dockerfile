@@ -3,7 +3,7 @@ FROM alpine:latest
 ENV host=127.0.0.1
 
 RUN apk update && \
-    apk add nginx ca-certificates wget openssl && \
+    apk add wget openssl && \
     update-ca-certificates
 RUN wget -N --no-check-certificate https://softs.pw/Bash/caddy_install.sh && chmod +x caddy_install.sh && sh caddy_install.sh
 
