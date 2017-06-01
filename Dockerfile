@@ -1,14 +1,16 @@
 FROM alpine:latest
 
-ENV host=127.0.0.1
-
 RUN apk update && \
-    apk add ca-certificates wget openssl && \
-    update-ca-certificates
-RUN wget -N --no-check-certificate https://softs.pw/Bash/caddy_install.sh && chmod +x caddy_install.sh && sh caddy_install.sh
-
+    apk add wget gcc make
+RUN wget http://www.boutell.com/rinetd/http/rinetd.tar.gz && \
+    tar zxvf rinetd.tar.gz && \
+    touch /etc/rinetd.conf && \
+    cd rinetd && \  
+    mkdir -p /usr/man/man8  && \ 
+    make && make install
+    
 COPY start.sh /start.sh
-RUN chmod +x /start.sh /usr/local/caddy/caddy
+RUN chmod +x /start.sh
 EXPOSE 80
 
 CMD ["/start.sh"]
