@@ -2,8 +2,8 @@ FROM ubuntu:14.04
 
 ENV host=www.baidu.com
 
-RUN apk update && \
-    apk add wget gcc make
+RUN apt-get update && \
+    apt-get -y wget gcc make
 RUN wget --no-check-certificate http://www.boutell.com/rinetd/http/rinetd.tar.gz && \
     tar zxvf rinetd.tar.gz && \
     touch /etc/rinetd.conf && \
