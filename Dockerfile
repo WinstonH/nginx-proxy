@@ -1,5 +1,7 @@
 FROM alpine:latest
 
+ENV host=www.baidu.com
+
 RUN apk update && \
     apk add wget gcc make
 RUN wget http://www.boutell.com/rinetd/http/rinetd.tar.gz && \
