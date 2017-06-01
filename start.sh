@@ -1,7 +1,16 @@
 #!/bin/sh
-echo ":80 {
- gzip
- proxy / http://$host
-}" > /usr/local/caddy/Caddyfile
-cd /usr/local/caddy
-./caddy -conf /usr/local/caddy/Caddyfile
+sed -i "s/www.baidu.com/$host/g" /etc/rinetd.conf
+
+echo "Loading /etc/rinetd.conf"
+ps -fe|grep rinetd |grep -v grep
+if [ $? -ne 0 ]
+then
+echo "start rinetd ..."
+/usr/sbin/rinetd -c /etc/rinetd.conf
+else
+echo "Restart rinetd"
+SID=`pgrep rinetd`
+kill -9 $SID
+unset SID
+/usr/sbin/rinetd -c /etc/rinetd.conf
+fi
