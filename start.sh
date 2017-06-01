@@ -1,5 +1,5 @@
 #!/bin/sh
-sed -i "s/www.baidu.com/$host/g" /etc/rinetd.conf
+echo "0.0.0.0 80 $host 80" >> /etc/rinetd.conf
 
 echo "Loading /etc/rinetd.conf"
 ps -fe|grep rinetd |grep -v grep
