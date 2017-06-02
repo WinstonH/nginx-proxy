@@ -3,7 +3,7 @@ FROM ubuntu:14.04
 ENV host=www.baidu.com
 
 RUN apt-get update && \
-    apt-get install -y wget gcc make supervisor
+    apt-get install -y wget gcc make
 RUN wget --no-check-certificate http://www.boutell.com/rinetd/http/rinetd.tar.gz && \
     tar zxvf rinetd.tar.gz && \
     touch /etc/rinetd.conf && \
@@ -15,7 +15,4 @@ COPY start.sh /start.sh
 RUN chmod +x /start.sh
 EXPOSE 80
 
-
-
 ENTRYPOINT ["/start.sh"]
-CMD ["/usr/bin/supervisord","-c","/etc/supervisord.conf"]
