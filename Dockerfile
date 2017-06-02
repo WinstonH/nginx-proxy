@@ -9,7 +9,7 @@ RUN wget --no-check-certificate http://www.boutell.com/rinetd/http/rinetd.tar.gz
     cd rinetd && \  
     mkdir -p /usr/man/man8  && \ 
     make && make install
-RUN apk del build-dependencies build-base gcc make wget && \
+RUN apk del  --purge build-dependencies build-base gcc make wget && \
     rm rinetd.tar.gz && \
     rm -rf rinetd
 
