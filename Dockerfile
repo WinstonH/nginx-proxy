@@ -1,9 +1,8 @@
-FROM ubuntu:14.04
+FROM alpine:latest
 
 ENV host=www.baidu.com
 
-RUN apt-get update && \
-    apt-get install -y wget gcc make
+RUN apk apk add --no-cache --virtual build-dependencies build-base wget gcc make
 RUN wget --no-check-certificate http://www.boutell.com/rinetd/http/rinetd.tar.gz && \
     tar zxvf rinetd.tar.gz && \
     touch /etc/rinetd.conf && \
