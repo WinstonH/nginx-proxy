@@ -14,4 +14,4 @@ COPY default.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80 443
 
-ENTRYPOINT ["/usr/sbin/nginx", "-g", "daemon off;"]
+ENTRYPOINT ["/usr/bin/nginx", "-g", "daemon off;"]
