@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-ENV host=www.baidu.com
+ENV host www.baidu.com
 
 RUN apk update && \
     apk add ca-certificates wget openssl && \
