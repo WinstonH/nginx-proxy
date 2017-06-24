@@ -1,14 +1,17 @@
 FROM alpine:latest
 
-ENV host=www.baidu.com
+ENV host 'www.baidu.com'
+ENV TZ 'Asia/Shanghai'
 
-RUN apk update && \
-    apk add ca-certificates wget openssl && \
+RUN apk upgrade --no-cache && \
+    apk add --no-cache bash tzdata ca-certificates openssl && \
+    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    echo "Asia/Shanghai" > /etc/timezone && \
+    rm -rf /var/cache/apk/* && \
     update-ca-certificates
-RUN wget -N --no-check-certificate https://softs.pw/Bash/caddy_install.sh && chmod +x caddy_install.sh && sh caddy_install.sh
 
-COPY start.sh /start.sh
-RUN chmod +x /start.sh /usr/local/caddy/caddy
-EXPOSE 80
+COPY default.conf /etc/nginx/conf.d/default.conf
 
-CMD ["/start.sh"]
+EXPOSE 80 443
+
+ENTRYPOINT ["/usr/sbin/nginx", "-g", "daemon off;"]
